@@ -4,6 +4,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Where we can define types and other misc. functions
+
 type RegisterUser struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
@@ -11,7 +13,7 @@ type RegisterUser struct {
 
 type User struct {
 	Username     string `json:"username"`
-	PasswordHash string `json:"passwordHash"`
+	PasswordHash string `json:"password"`
 }
 
 func NewUser(registerUser RegisterUser) (User, error) {
