@@ -54,6 +54,8 @@ func NewGoLoginStack(scope constructs.Construct, id string, props *GoLoginStackP
 	registerResource.AddMethod(jsii.String("POST"), integration, nil)
 	loginResource := api.Root().AddResource(jsii.String("login"), nil)
 	loginResource.AddMethod(jsii.String("POST"), integration, nil)
+	protected := api.Root().AddResource(jsii.String("protected"), nil)
+	protected.AddMethod(jsii.String("GET"), integration, nil)
 
 	return stack
 }
