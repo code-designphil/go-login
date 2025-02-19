@@ -3,6 +3,7 @@ package main
 import (
 	"lambda-func/app"
 	"lambda-func/middleware"
+	"log"
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -24,6 +25,7 @@ func ProtectedHandler(request events.APIGatewayProxyRequest) (events.APIGatewayP
 func main() {
 	app := app.NewApp()
 	lambda.Start(func(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+		log.Print("Lambda function invoked with request: ", request)
 		switch request.Path {
 		case "/register":
 			return app.ApiHandler.RegisterUserHandler(request)

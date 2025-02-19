@@ -5,6 +5,7 @@ go 1.22.0
 toolchain go1.24.0
 
 require (
+	github.com/DataDog/datadog-cdk-constructs-go/ddcdkconstruct v1.23.0
 	github.com/aws/aws-cdk-go/awscdk/v2 v2.178.2
 	github.com/aws/constructs-go/constructs/v10 v10.4.2
 	github.com/aws/jsii-runtime-go v1.106.0
@@ -16,9 +17,11 @@ require (
 	github.com/cdklabs/awscdk-asset-kubectl-go/kubectlv20/v2 v2.1.3 // indirect
 	github.com/cdklabs/awscdk-asset-node-proxy-agent-go/nodeproxyagentv6/v2 v2.1.0 // indirect
 	github.com/cdklabs/cloud-assembly-schema-go/awscdkcloudassemblyschema/v39 v39.2.4 // indirect
+	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/yuin/goldmark v1.4.13 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
 	golang.org/x/mod v0.22.0 // indirect
