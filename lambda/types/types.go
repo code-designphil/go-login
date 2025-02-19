@@ -1,8 +1,12 @@
 package types
 
 import (
+	"context"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -46,8 +50,10 @@ func CreateToken(user User) string {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims, nil)
-	// TODO: Change this to a more secure secret
-	secret := "secret"
+	secret, err := RetrieveSecret("jwt-secret", "eu-north-1")
+	if err != nil {
+		return ""
+	}
 
 	tokenString, err := token.SignedString([]byte(secret))
 	if err != nil {
@@ -55,4 +61,25 @@ func CreateToken(user User) string {
 	}
 
 	return tokenString
+}
+
+func RetrieveSecret(secretName, region string) (string, error) {
+	config, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(region))
+	if err != nil {
+		return "", err
+	}
+
+	svc := secretsmanager.NewFromConfig(config)
+
+	input := &secretsmanager.GetSecretValueInput{
+		SecretId: aws.String(secretName),
+	}
+
+	result, err := svc.GetSecretValue(context.TODO(), input)
+	if err != nil {
+		return "", err
+	}
+
+	secretString := *result.SecretString
+	return secretString, nil
 }

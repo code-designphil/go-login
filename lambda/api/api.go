@@ -67,9 +67,6 @@ func (api ApiHandler) RegisterUserHandler(request events.APIGatewayProxyRequest)
 		}, err
 	}
 
-	fmt.Printf("User registered successfully reg: %v", registerUser)
-	fmt.Printf("User registered successfully non-reg: %v", user)
-
 	return events.APIGatewayProxyResponse{
 		Body:       "User registered successfully",
 		StatusCode: http.StatusCreated,
@@ -101,7 +98,6 @@ func (api ApiHandler) LoginUserHandler(request events.APIGatewayProxyRequest) (e
 	}
 
 	if !types.ValidatePassword(user.PasswordHash, loginRequest.Password) {
-		fmt.Printf("comparison of %s and %s failed", user.PasswordHash, loginRequest.Password)
 		return events.APIGatewayProxyResponse{
 			Body:       "Invalid user credentials",
 			StatusCode: http.StatusBadRequest,

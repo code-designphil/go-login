@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"lambda-func/app"
 	"lambda-func/middleware"
 	"net/http"
@@ -13,14 +12,6 @@ import (
 type Event struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
-}
-
-func HandleRequest(event Event) (string, error) {
-	if event.Username == "" {
-		return "", fmt.Errorf("username cannot be empty")
-	}
-
-	return fmt.Sprintf("Successfully called by %s", event.Username), nil
 }
 
 func ProtectedHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {

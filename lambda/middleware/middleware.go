@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"fmt"
+	"lambda-func/types"
 	"net/http"
 	"strings"
 	"time"
@@ -55,9 +56,12 @@ func extractTokenFromHeaders(headers map[string]string) string {
 }
 
 func parseToken(tokenString string) (jwt.MapClaims, error) {
+	secret, err := types.RetrieveSecret("jwt-secret", "eu-north-1")
+	if err != nil {
+		return nil, fmt.Errorf("unauthorized")
+	}
+
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		// TODO: Change this to a more secure secret
-		secret := "secret"
 		return []byte(secret), nil
 	})
 	if err != nil {
